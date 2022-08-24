@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <div
       className="bg-white sticky top-0 z-10"
-      style={{ backgroundColor: "#F0FBFF" }}
+      style={{ backgroundColor: "#ECFEFF" }}
     >
       <div class="navbar container mx-auto">
         <div class="navbar-start">
