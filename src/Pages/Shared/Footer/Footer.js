@@ -4,14 +4,14 @@ import footerImg from "../../../Assets/assets/images/footer.png";
 const Footer = () => {
   return (
     <section
-      className="container mx-auto"
+      className="container mx-auto bg-center"
       style={{
         backgroundImage: `url(${footerImg})`,
         backgroundSize: "cover",
       }}
     >
       <footer class="p-10">
-        <div className="footer flex justify-between">
+        <div className="footer sm:flex sm:justify-between pt-10">
           <div>
             <span class="footer-title">SERVICES</span>
             <a class="link link-hover">Emergency Checkup</a>
