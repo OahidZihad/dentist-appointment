@@ -11,21 +11,21 @@ const ContactUs = () => {
         </div>
         <form className="text-center py-4">
           <input
-            className="p-2 rounded-md w-[400px]"
+            className="p-2 rounded-md w-[300px] md:w-[400px]"
             type="text"
             placeholder="Email Address"
           />
           <br />
           <br />
           <input
-            className="p-2 rounded-md w-[400px]"
+            className="p-2 rounded-md w-[300px] md:w-[400px]"
             type="text"
             placeholder="Subject"
           />
           <br />
           <br />
           <textarea
-            className="p-2 rounded-md w-[400px]"
+            className="p-2 rounded-md w-[300px] md:w-[400px]"
             name=""
             id=""
             cols="30"
