@@ -6,7 +6,7 @@ const Banner = () => {
   return (
     <div
       className="bg-no-repeat"
-      style={{ backgroundImage: `url(${chairBgImg})` }}
+      style={{ backgroundImage: `url(${chairBgImg})`, backgroundSize: "cover" }}
     >
       <div class="hero min-h-screen container mx-auto">
         <div class="hero-content flex-col lg:flex-row-reverse">

@@ -13,7 +13,7 @@ const AppointmentBanner = ({ date, setDate }) => {
       className="bg-no-repeat"
       style={{
         backgroundImage: `url(${chairBgImg})`,
-        backgroundPosition: "cover",
+        backgroundSize: "cover",
       }}
     >
       <div class="hero min-h-screen container mx-auto">
