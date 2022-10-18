@@ -1,6 +1,9 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
 
 const BookingModal = () => {
+  const [user, loading, error] = useAuthState(auth);
   return (
     <div>
       <input type="checkbox" id="booking-modal" class="modal-toggle" />
@@ -31,12 +34,14 @@ const BookingModal = () => {
             </select>
             <input
               type="text"
-              placeholder="Your Name"
+              disabled
+              value={user?.displayName}
               class="input input-bordered w-full max-w-sm"
             />
             <input
               type="email"
-              placeholder="Emal Address"
+              disabled
+              value={user?.email}
               class="input input-bordered w-full max-w-sm"
             />
             <input
