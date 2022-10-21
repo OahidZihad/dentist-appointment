@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import BookingModal from "./BookingModal";
+import Service from "./Service";
+import { useQuery } from "react-query";
+import Loading from "../Shared/Loading";
 
 const AvailableAppointments = ({ date }) => {
-  const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/service")
-      .then((res) => res.json())
-      .then((data) => setServices(data));
-  }, []);
+  const formattedDate = format(date, "PP");
+
+  const {
+    isLoading,
+    data: services,
+    refetch,
+  } = useQuery(["available", formattedDate], () =>
+    fetch(`http://localhost:5000/available?date=${formattedDate}`).then((res) =>
+      res.json()
+    )
+  );
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="container mx-auto">
@@ -19,38 +31,23 @@ const AvailableAppointments = ({ date }) => {
       </h4>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {services.map((service) => (
-          <div class="card lg:max-w-lg bg-base-100 shadow-xl">
-            <div class="card-body text-center">
-              <h2 class="card-title justify-center text-secondary">
-                {service.name}
-              </h2>
-              <p>
-                {service.slots.length > 0 ? (
-                  <span>{service.slots[0]}</span>
-                ) : (
-                  <span className="text-red-500">Try another date.</span>
-                )}
-              </p>
-              <p>
-                {service.slots.length}{" "}
-                {service.slots.length > 1 ? "spaces" : "space"} available
-              </p>
-              <div class="card-actions justify-center">
-                <label
-                  for="booking-modal"
-                  class="btn btn-secondary text-white"
-                  onClick={() => setTreatment(true)}
-                >
-                  Book Appointment
-                </label>
-              </div>
-            </div>
-          </div>
+        {services?.map((service) => (
+          <Service
+            key={service._id}
+            service={service}
+            setTreatment={setTreatment}
+          ></Service>
         ))}
       </div>
 
-      {treatment && <BookingModal></BookingModal>}
+      {treatment && (
+        <BookingModal
+          date={date}
+          treatment={treatment}
+          setTreatment={setTreatment}
+          refetch={refetch}
+        ></BookingModal>
+      )}
     </div>
   );
 };
