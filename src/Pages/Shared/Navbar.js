@@ -29,6 +29,11 @@ const Navbar = () => {
       <Link to="/contact" class="btn btn-ghost capitalize font-bold">
         Contact Us
       </Link>
+      {user && (
+        <Link to="/dashboard" class="btn btn-ghost capitalize font-bold">
+          Dashboard
+        </Link>
+      )}
       {user ? (
         <button className="btn btn-ghost" onClick={logout}>
           Sign Out
