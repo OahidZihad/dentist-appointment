@@ -27,7 +27,7 @@ const SignUp = () => {
 
   if (token) {
     console.log(user || gUser);
-    navigate("/appointment");
+    // navigate("/appointment");
   }
 
   let signInError;
@@ -46,7 +46,7 @@ const SignUp = () => {
   const onSubmit = async (data) => {
     await createUserWithEmailAndPassword(data.email, data.password);
     await updateProfile({ displayName: data.name });
-    // navigate("/appointment");
+    navigate("/appointment");
   };
 
   return (
