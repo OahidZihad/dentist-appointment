@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading";
 import UserRow from "./UserRow";
 
 const Users = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const {
     data: users,
     isLoading,
@@ -21,11 +23,22 @@ const Users = () => {
     return <Loading></Loading>;
   }
 
+  const filteredUsers = users.filter((u) =>
+    u.email.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div>
-      <h2 className="text-2xl">All Users: {users.length}</h2>
+      <h2 className="text-2xl">All Users: {filteredUsers.length}</h2>
 
       <br />
+      <input
+        type="text"
+        placeholder="Search by email..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="input input-bordered w-full max-w-xs mb-4"
+      />
       <div class="overflow-x-auto">
         <table class="table w-full">
           <thead>
@@ -37,7 +50,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <UserRow key={user._id} user={user} refetch={refetch}></UserRow>
             ))}
           </tbody>
